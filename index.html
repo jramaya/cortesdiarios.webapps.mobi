@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+  <title>CAB</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="./assets/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="./assets/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
+</head>
+
+<body>
+
+  <div class="navbar-fixed">
+    <nav class="light-blue lighten-1" role="navigation">
+      <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Cortes</a>
+        <ul class="right hide-on-med-and-down">
+        </ul>
+
+        <ul id="nav-mobile" class="sidenav">
+
+        </ul>
+        <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      </div>
+    </nav>
+  </div>
+  <!--   /NAVBAR Section  -->
+
+  <div class="container">
+    <h3>Cortes del día</h3>
+    <!--<input id="dailyTableFilter" type="text" placeholder="filter by.."></input>-->
+    <div id="dailyTable">Loading...</div>
+    
+    <h3>Cortes del mes</h3>
+    <!--<input id="dailyTableFilter" type="text" placeholder="filter by.."></input>-->
+    <div id="monthTable">Loading...</div>
+    <footer>
+
+    </footer>
+  </div>
+
+  <script id="dailyTable_template" type="text/html">
+    <table>
+      <tr><th class="tHeader">Fecha</th><th class="tHeader">Barbero</th><th class="tHeader">Trabajo</th><th class="tHeader">Total Cortes</th><th class="tHeader">Total Hecho</th></tr>
+        {{#rows}}
+          <tr><td>{{DailyDate}}</td><td>{{DailyAccount}}</td><td>{{DailyCategory}}</td><td>{{DailyTotalJobs}}</td><td>{{DailyTotalJobsEarnings}}</td></tr>
+        {{/rows}}
+    </table>
+  </script>
+
+  <script id="monthTable_template" type="text/html">
+    <table>
+      <tr><th class="tHeader">Mes</th><th class="tHeader">Barbero</th><th class="tHeader">Trabajo</th><th class="tHeader">Total Cortes</th></tr>
+        {{#rows}}
+          <tr><td>{{MonthlyDate}}</td><td>{{MonthlyAccount}}</td><td>{{MonthlyCategory}}</td><td>{{MonthlyTotalJobs}}</td></tr>
+        {{/rows}}
+    </table>
+  </script>
+-
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+      var URL = "1UeQv9-TCaw5vyL9CWRhws3yL07vog8RDnWy35y3LhbQ";
+      Tabletop.init({key: URL, callback: showDailyInfo, simpleSheet: true});
+      Tabletop.init({key: URL, callback: showMonthInfo, simpleSheet: true});
+    })
+
+    function showDailyInfo (data) {
+      var dailyTableOptions = {
+        "data": data,
+        //"pagination": 10,
+        "tableDiv": "#dailyTable"
+      }
+      Sheetsee.makeTable(dailyTableOptions);
+      }
+
+      function showMonthInfo (monthData) {
+      var monthlyTableOptions = {
+        "data": monthData,
+        //"pagination": 10,
+        "tableDiv": "#monthTable"
+      }
+      Sheetsee.makeTable(monthlyTableOptions);
+    }
+  </script>
+  
+  <!--FOOTER Section -->
+  <footer class="page-footer orange">
+    <div class="container">
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        <a href="https://dubaibarbershop.com">Dubai BarberShop</a>
+      </div>
+    </div>
+  </footer>
+  <!--/FOOTER Section -->
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="./assets/js/materialize.js"></script>
+  <script src="./assets/js/init.js"></script>
+  <script src="./assets/js/sheetsee.js"></script>
+</body>
+
+</html>
