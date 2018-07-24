@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="./assets/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection" />
   <link href="./assets/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.2/tabletop.min.js'></script>
 </head>
 
 <body>
@@ -31,6 +31,10 @@
   <!--   /NAVBAR Section  -->
 
   <div class="container">
+      <h3>Cortes por día</h3>
+      <!--<input id="dailyTableFilter" type="text" placeholder="filter by.."></input>-->
+      <div id="jobsDayTable">Loading...</div>
+
     <h3>Cortes del día</h3>
     <!--<input id="dailyTableFilter" type="text" placeholder="filter by.."></input>-->
     <div id="dailyTable">Loading...</div>
@@ -42,6 +46,15 @@
 
     </footer>
   </div>
+
+  <script id="jobsDayTable_template" type="text/html">
+    <table>
+      <tr><th class="tHeader">Cortes por día Carlos</th><th class="tHeader">Cortes por día Eliseo</th></tr>
+        {{#rows}}
+          <tr><td>{{Carlos}}</td><td>{{Eliseo}}</td></tr>
+        {{/rows}}
+    </table>
+  </script>
 
   <script id="dailyTable_template" type="text/html">
     <table>
@@ -63,10 +76,23 @@
 -
   <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function() {
-      var URL = "1UeQv9-TCaw5vyL9CWRhws3yL07vog8RDnWy35y3LhbQ";
-      Tabletop.init({key: URL, callback: showDailyInfo, simpleSheet: true});
-      Tabletop.init({key: URL, callback: showMonthInfo, simpleSheet: true});
+      var URLMonth = "1UeQv9-TCaw5vyL9CWRhws3yL07vog8RDnWy35y3LhbQ";
+      var URLDia = '1RY9leO8U7rp1eiyW4Nz3gfJt21ehsoixxH51jIoCVXo';
+      var URLXDia = '1ckDkcx-kHwYR-9dVOOVt36LO2KQcLZhXoCs5Yy8sUI4';
+      //var URL = "2PACX-1vQ8MJNs25NpO7qYXV0ZPzilxraFXqW7sPKvUqM7pHudHHGeNbde3P4lu59iDlY1sRTso42dcJTjZM3T";
+      Tabletop.init({key: URLXDia, callback: showJobsByDayInfo, simpleSheet: true});
+      Tabletop.init({key: URLDia, callback: showDailyInfo, simpleSheet: true});
+      Tabletop.init({key: URLMonth, callback: showMonthInfo, simpleSheet: true});
     })
+
+      function showJobsByDayInfo (jobsByDayData) {
+      var jobsByDayTableOptions = {
+        "data": jobsByDayData,
+        //"pagination": 10,
+        "tableDiv": "#jobsDayTable"
+      }
+      Sheetsee.makeTable(jobsByDayTableOptions);
+      }
 
     function showDailyInfo (data) {
       var dailyTableOptions = {
