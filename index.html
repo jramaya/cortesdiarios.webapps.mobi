@@ -77,7 +77,7 @@
   </script>
 -
   <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function() {
+    function bind() {
       var URLMonth = "1UeQv9-TCaw5vyL9CWRhws3yL07vog8RDnWy35y3LhbQ";
       var URLDia = '1RY9leO8U7rp1eiyW4Nz3gfJt21ehsoixxH51jIoCVXo';
       var URLXDia = '1ckDkcx-kHwYR-9dVOOVt36LO2KQcLZhXoCs5Yy8sUI4';
@@ -85,7 +85,13 @@
       Tabletop.init({key: URLXDia, callback: showJobsByDayInfo, simpleSheet: true});
       Tabletop.init({key: URLDia, callback: showDailyInfo, simpleSheet: true});
       Tabletop.init({key: URLMonth, callback: showMonthInfo, simpleSheet: true});
-    })
+    }
+
+    document.addEventListener('DOMContentLoaded', bind())
+
+    window.setInterval(function(){
+      bind();
+  }, 5000);
 
       function showJobsByDayInfo (jobsByDayData) {
       var jobsByDayTableOptions = {
