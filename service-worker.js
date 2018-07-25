@@ -1,5 +1,5 @@
 // Set a name for the current cache
-var cacheName = 'v7'; 
+var cacheName = 'v10'; 
 
 // Default files to always cache
 var cacheFiles = [
@@ -17,7 +17,11 @@ var cacheFiles = [
 	'./assets/js/init.js',
 	'./assets/js/materialize.js',
 	'./assets/js/materialize.min.js',
-	'./assets/js/sheetsee.js'
+	'./assets/js/sheetsee.js',
+	'https://fonts.googleapis.com/icon?family=Material+Icons',
+	'https://fonts.gstatic.com/s/materialicons/v38/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2',
+	'https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.2/tabletop.min.js',
+	'https://code.jquery.com/jquery-2.1.1.min.js'
 ]
 
 
